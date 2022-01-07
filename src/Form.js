@@ -28,13 +28,9 @@ class SearchForm extends React.Component {
         const queryParam = "query=" + this.state["query"]
         const subjectParam = "subject=" + this.state["subject"]
 
-        const andChar = "&"
-
         const url =
             "https://wikisearch-backend.herokuapp.com/api-test/?" +
-            queryParam +
-            andChar +
-            subjectParam
+            queryParam + "&" + subjectParam
 
         const request = await fetch(url)
         const response = await request.json()
