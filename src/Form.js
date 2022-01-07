@@ -29,14 +29,13 @@ class SearchForm extends React.Component {
         const subjectParam = "subject=" + this.state["subject"]
 
         const url =
-            "https://wikisearch-backend.herokuapp.com/api-test/?" +
+            "https://wikisearch-backend.herokuapp.com/wikisearch/?" +
             queryParam + "&" + subjectParam
 
         const request = await fetch(url)
         const response = await request.json()
-
+        console.log(response.msg)
     }
-
 
 
     render() {
