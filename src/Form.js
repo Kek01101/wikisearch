@@ -34,7 +34,9 @@ class SearchForm extends React.Component {
 
         const request = await fetch(url)
         const response = await request.json()
-        console.log(response.msg)
+        console.log(response.sentence_1)
+        console.log(response.sentence_2)
+        console.log(response.sentence_3)
     }
 
 
