@@ -9,6 +9,10 @@ import Container from 'react-bootstrap/Container';
 import UsageModal from "./Modals/UsageModal"
 import AboutModal from "./Modals/AboutModal";
 
+const repoLink = () => {
+    window.open("https://github.com/Kek01101/wikisearch/tree/master")
+}
+
 function Header() {
     const [aboutModalShow, setAboutModalShow] = React.useState(false)
     const [useModalShow, setUseModalShow] = React.useState(false)
@@ -29,7 +33,7 @@ function Header() {
                                 onHide={() => setUseModalShow(false)}
                             />
                         </Nav>
-                        <Button variant="flat">Repository</Button>
+                        <Button variant="flat" onClick={() => repoLink()}>Repository</Button>
                         <Button variant="flat" onClick={() => setAboutModalShow(true)}>About</Button>
                         <AboutModal
                             show={aboutModalShow}
