@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import Citation from "./Citation";
 
 class SearchForm extends React.Component {
     constructor(props) {
@@ -18,7 +19,10 @@ class SearchForm extends React.Component {
             search5: "",
             sentence1: "",
             sentence2: "",
-            sentence3: ""
+            sentence3: "",
+            citation1: "",
+            citation2: "",
+            citation3: ""
         }
 
         this.handleSubjectChange = this.handleSubjectChange.bind(this)
@@ -62,12 +66,20 @@ class SearchForm extends React.Component {
 
         this.setState({
             sentence1: response.sentence_1, sentence2: response.sentence_2, sentence3: response.sentence_3,
+            citation1: response.citation_1, citation2: response.citation_2, citation3: response.citation_3,
             step: 3
         })
+        console.log(this.citation1)
+        console.log(this.citation2)
+        console.log(this.citation3)
     }
 
     render() {
-        const {step, search1, search2, search3, search4, search5, sentence1, sentence2, sentence3} = this.state
+        const {
+            step, search1, search2, search3, search4, search5,
+            sentence1, sentence2, sentence3,
+            citation1, citation2, citation3
+        } = this.state
         switch (step) {
             case 1:
                 return (
@@ -115,14 +127,23 @@ class SearchForm extends React.Component {
             case 3:
                 return(
                     <div>
-                        <p>Sentence 1: {sentence1}</p>
-                        <br />
-                        <p>Sentence 2: {sentence2}</p>
-                        <br />
-                        <p>Sentence 3: {sentence3}</p>
+                        <Citation
+                            digit={1}
+                            sentence={sentence1}
+                            citation={citation1}
+                        />
+                        <Citation
+                            digit={2}
+                            sentence={sentence2}
+                            citation={citation2}
+                        />
+                        <Citation
+                            digit={3}
+                            sentence={sentence3}
+                            citation={citation3}
+                        />
                     </div>
                 )
-
         }
     }
 }
