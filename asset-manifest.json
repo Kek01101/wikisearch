@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/wikisearch/static/css/main.3aa38ac2.chunk.css",
-    "main.js": "/wikisearch/static/js/main.709a0107.chunk.js",
-    "main.js.map": "/wikisearch/static/js/main.709a0107.chunk.js.map",
-    "runtime-main.js": "/wikisearch/static/js/runtime-main.a880b326.js",
-    "runtime-main.js.map": "/wikisearch/static/js/runtime-main.a880b326.js.map",
+    "main.css": "/wikisearch/static/css/main.88eea640.chunk.css",
+    "main.js": "/wikisearch/static/js/main.e4557455.chunk.js",
+    "main.js.map": "/wikisearch/static/js/main.e4557455.chunk.js.map",
+    "runtime-main.js": "/wikisearch/static/js/runtime-main.03fa693e.js",
+    "runtime-main.js.map": "/wikisearch/static/js/runtime-main.03fa693e.js.map",
     "static/css/2.8c0e6b67.chunk.css": "/wikisearch/static/css/2.8c0e6b67.chunk.css",
-    "static/js/2.16da690a.chunk.js": "/wikisearch/static/js/2.16da690a.chunk.js",
-    "static/js/2.16da690a.chunk.js.map": "/wikisearch/static/js/2.16da690a.chunk.js.map",
-    "static/js/3.1937e58d.chunk.js": "/wikisearch/static/js/3.1937e58d.chunk.js",
-    "static/js/3.1937e58d.chunk.js.map": "/wikisearch/static/js/3.1937e58d.chunk.js.map",
+    "static/js/2.08e79122.chunk.js": "/wikisearch/static/js/2.08e79122.chunk.js",
+    "static/js/2.08e79122.chunk.js.map": "/wikisearch/static/js/2.08e79122.chunk.js.map",
+    "static/js/3.9040c056.chunk.js": "/wikisearch/static/js/3.9040c056.chunk.js",
+    "static/js/3.9040c056.chunk.js.map": "/wikisearch/static/js/3.9040c056.chunk.js.map",
     "index.html": "/wikisearch/index.html",
     "static/css/2.8c0e6b67.chunk.css.map": "/wikisearch/static/css/2.8c0e6b67.chunk.css.map",
-    "static/css/main.3aa38ac2.chunk.css.map": "/wikisearch/static/css/main.3aa38ac2.chunk.css.map",
-    "static/js/2.16da690a.chunk.js.LICENSE.txt": "/wikisearch/static/js/2.16da690a.chunk.js.LICENSE.txt",
+    "static/css/main.88eea640.chunk.css.map": "/wikisearch/static/css/main.88eea640.chunk.css.map",
+    "static/js/2.08e79122.chunk.js.LICENSE.txt": "/wikisearch/static/js/2.08e79122.chunk.js.LICENSE.txt",
     "static/media/logo.15bb369f.png": "/wikisearch/static/media/logo.15bb369f.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.a880b326.js",
+    "static/js/runtime-main.03fa693e.js",
     "static/css/2.8c0e6b67.chunk.css",
-    "static/js/2.16da690a.chunk.js",
-    "static/css/main.3aa38ac2.chunk.css",
-    "static/js/main.709a0107.chunk.js"
+    "static/js/2.08e79122.chunk.js",
+    "static/css/main.88eea640.chunk.css",
+    "static/js/main.e4557455.chunk.js"
   ]
 }
