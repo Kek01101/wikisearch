@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Citation from "./Citation";
+import "./Form.css"
 
 class SearchForm extends React.Component {
     constructor(props) {
@@ -126,7 +127,7 @@ class SearchForm extends React.Component {
                 )
             case 3:
                 return(
-                    <div>
+                    <div id="citation">
                         <Citation
                             digit={1}
                             sentence={sentence1}
@@ -142,6 +143,7 @@ class SearchForm extends React.Component {
                             sentence={sentence3}
                             citation={citation3}
                         />
+                        <br />
                     </div>
                 )
         }

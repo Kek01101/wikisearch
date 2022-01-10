@@ -1,0 +1,17 @@
+.Col {
+    font-size: 10px;
+}
+
+.Row {
+    font-size: 10px;
+}
+
+.btn-wide {
+    background-color: #4D13C7;
+    color: white;
+    min-height: 20px;
+    min-width: 100px;
+    max-width: 120px;
+    height: 50px;
+    font-size: 23px;
+}
