@@ -24,7 +24,9 @@ class SearchForm extends React.Component {
             citation1: "",
             citation2: "",
             citation3: "",
-            url: ""
+            url: "",
+            article_1: "",
+            article_2: ""
         }
 
         this.handleSubjectChange = this.handleSubjectChange.bind(this)
@@ -69,11 +71,9 @@ class SearchForm extends React.Component {
         this.setState({
             sentence1: response.sentence_1, sentence2: response.sentence_2, sentence3: response.sentence_3,
             citation1: response.citation_1, citation2: response.citation_2, citation3: response.citation_3,
+            article_1: response.article_1, article_2: response.article_2,
             url: response.url, step: 3
         })
-        console.log(this.citation1)
-        console.log(this.citation2)
-        console.log(this.citation3)
     }
 
     render() {
