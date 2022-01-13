@@ -6,8 +6,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import UsageModal from "./Modals/UsageModal"
-import AboutModal from "./Modals/AboutModal";
+import UsageModal from "./Popups/UsageModal"
+import AboutModal from "./Popups/AboutModal";
 
 const repoLink = () => {
     window.open("https://github.com/Kek01101/wikisearch/tree/master")

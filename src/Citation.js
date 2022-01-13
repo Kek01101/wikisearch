@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Row, Col, Container} from "react-bootstrap";
-import CitationModal from "./Modals/CitationModal";
+import CitationModal from "./Popups/CitationModal";
 import "./Citation.css";
 
 function Citation(props) {

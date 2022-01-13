@@ -1,9 +1,12 @@
 import React from "react";
+import Container from "react-bootstrap/Container";
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Citation from "./Citation";
+import ArticleAlert from "./Popups/Article_alert";
+import FormatAlert from "./Popups/FormatAlert";
 import "./Form.css"
 
 class SearchForm extends React.Component {
@@ -26,7 +29,9 @@ class SearchForm extends React.Component {
             citation3: "",
             url: "",
             article_1: "",
-            article_2: ""
+            article_2: "",
+            num_articles: 0,
+            valid_val: 0
         }
 
         this.handleSubjectChange = this.handleSubjectChange.bind(this)
@@ -46,17 +51,29 @@ class SearchForm extends React.Component {
     async handleSearchSubmit(event) {
         event.preventDefault()
 
-        const subjectParam = "subject=" + this.state["subject"]
-        const url = "https://wikisearch-backend.herokuapp.com/wikimatch/?" + subjectParam
+        if (this.state["query"] === "" && this.state["subject"] === "") {
+            this.setState({valid_val: 1})
+        } else if (this.state["subject"].length > 100) {
+            this.setState({valid_val: 2})
+        } else if (this.state["query"].length > 150) {
+            this.setState({valid_val: 3})
+        } else if (this.state["subject"] === "") {
+            this.setState({valid_val: 4})
+        } else if (this.state["query"] === "") {
+            this.setState({valid_val: 5})
+        } else {
+            const subjectParam = "subject=" + this.state["subject"]
+            const url = "https://wikisearch-backend.herokuapp.com/wikimatch/?" + subjectParam
 
 
-        const request = await fetch(url)
-        const response = await request.json()
+            const request = await fetch(url)
+            const response = await request.json()
 
-        this.setState({
-            search1: response.data0, search2: response.data1, search3: response.data2,
-            search4: response.data3, search5: response.data4, step: 2
-        })
+            this.setState({
+                search1: response.data0, search2: response.data1, search3: response.data2,
+                search4: response.data3, search5: response.data4, step: 2, valid_val: 0
+            })
+        }
     }
 
     async handleSubjectSelection(num) {
@@ -74,6 +91,11 @@ class SearchForm extends React.Component {
             article_1: response.article_1, article_2: response.article_2,
             url: response.url, step: 3
         })
+        if (response.article_2 !== "") {
+            this.setState({step: 5, num_articles: 2})
+        } else if (response.article_1 !== "") {
+            this.setState({step: 4, num_articles: 1})
+        }
     }
 
     render() {
@@ -81,24 +103,32 @@ class SearchForm extends React.Component {
             step, search1, search2, search3, search4, search5,
             sentence1, sentence2, sentence3,
             citation1, citation2, citation3,
-            url
+            article_1, article_2, num_articles,
+            url, valid_val
         } = this.state
         switch (step) {
             case 1:
                 return (
-                    <Form>
-                        <Row>
-                            <Form.Group as={Col} controlId="subjectGroup">
-                                <Form.Control type="subject" placeholder="Enter Subject"
-                                              onChange={this.handleSubjectChange}/>
-                            </Form.Group>
+                    <Container style={{
+                        maxWidth: '35%'
+                    }}>
+                        <FormatAlert
+                        val={valid_val}/>
+                        <Form>
+                            <Row>
+                                <Form.Group as={Col} controlId="subjectGroup">
+                                    <Form.Control type="subject" placeholder="Enter Subject"
+                                                  onChange={this.handleSubjectChange}/>
+                                </Form.Group>
 
-                            <Button as={Col} variant="flat" type="submit" onClick={this.handleSearchSubmit}>Search</Button>
-                        </Row>
-                        <Form.Group controlId="queryGroup">
-                            <Form.Control type="query" placeholder="Enter Query" onChange={this.handleQueryChange}/>
-                        </Form.Group>
-                    </Form>
+                                <Button as={Col} variant="flat" type="submit" onClick={this.handleSearchSubmit}>Search</Button>
+                            </Row>
+                            <br />
+                            <Form.Group controlId="queryGroup">
+                                <Form.Control type="query" placeholder="Enter Query" onChange={this.handleQueryChange}/>
+                            </Form.Group>
+                        </Form>
+                    </Container>
                 )
             case 2:
                 return (
@@ -146,8 +176,34 @@ class SearchForm extends React.Component {
                             citation={citation3}
                         />
                         <br />
-                        <a href={url}>Click here to go to source Wikipedia page</a>
+                        <a href={url} target="_blank" rel="noreferrer">Click here to go to source Wikipedia page</a>
                         <br />
+                    </div>
+                )
+            case 4:
+                return(
+                    <div>
+                    <ArticleAlert />
+                        <div id="citation">
+                            <Citation
+                                digit={1}
+                                sentence={sentence1}
+                                citation={citation1}
+                            />
+                            <Citation
+                                digit={2}
+                                sentence={sentence2}
+                                citation={citation2}
+                            />
+                            <Citation
+                                digit={3}
+                                sentence={sentence3}
+                                citation={citation3}
+                            />
+                            <br />
+                            <a href={url} target="_blank" rel="noreferrer">Click here to go to source Wikipedia page</a>
+                            <br />
+                        </div>
                     </div>
                 )
         }
