@@ -92,7 +92,7 @@ class SearchForm extends React.Component {
             url: response.url, step: 3
         })
         if (response.article_2 !== "") {
-            this.setState({step: 5, num_articles: 2})
+            this.setState({step: 4, num_articles: 2})
         } else if (response.article_1 !== "") {
             this.setState({step: 4, num_articles: 1})
         }

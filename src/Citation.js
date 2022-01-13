@@ -7,11 +7,11 @@ function Citation(props) {
     const [modalShow, setModalShow] = React.useState(false)
     return (
         <Container className="my-auto">
-            <Row>
+            <Row style={{textAlign: "left"}}>
                 Sentence {props.digit}:
             </Row>
             <Row>
-                <Col>{props.sentence}</Col>
+                <Col style={{textAlign: "left", fontSize: "70%"}}>{props.sentence}</Col>
                 <Button as={Col} sm={1} variant="wide" onClick={() => setModalShow(true)}>Citation</Button>
             </Row>
             <CitationModal
