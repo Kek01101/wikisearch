@@ -110,22 +110,30 @@ class SearchForm extends React.Component {
             case 1:
                 return (
                     <Container style={{
-                        maxWidth: '35%'
+                        maxWidth: '35%',
+                        minWidth: '300px'
                     }}>
                         <FormatAlert
                         val={valid_val}/>
                         <Form>
-                            <Row>
+                            <Row style={{maxWidth: "100%"}}>
                                 <Form.Group as={Col} controlId="subjectGroup">
                                     <Form.Control type="subject" placeholder="Enter Subject"
-                                                  onChange={this.handleSubjectChange}/>
+                                                  onChange={this.handleSubjectChange}
+                                                  style={{fontSize: "85%"}}/>
                                 </Form.Group>
 
-                                <Button as={Col} variant="flat" type="submit" onClick={this.handleSearchSubmit}>Search</Button>
+                                <Button as={Col} variant="flat" type="submit"
+                                        onClick={this.handleSearchSubmit}
+                                        style={{fontSize: "85%",
+                                                maxWidth: "160px"}}>
+                                Search</Button>
                             </Row>
                             <br />
                             <Form.Group controlId="queryGroup">
-                                <Form.Control type="query" placeholder="Enter Query" onChange={this.handleQueryChange}/>
+                                <Form.Control type="query" placeholder="Enter Query" onChange={this.handleQueryChange}
+                                              style={{fontSize: "85%",
+                                                      maxWidth: "98%"}}/>
                             </Form.Group>
                         </Form>
                     </Container>
