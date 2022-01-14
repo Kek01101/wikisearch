@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import Citation from "./Citation";
 import ArticleAlert from "./Popups/Article_alert";
 import FormatAlert from "./Popups/FormatAlert";
+import SubmitButton from "./SubmitButton";
 import "./Form.css"
 
 class SearchForm extends React.Component {
@@ -30,8 +31,9 @@ class SearchForm extends React.Component {
             url: "",
             article_1: "",
             article_2: "",
-            num_articles: 0,
-            valid_val: 0
+            valid_val: 0,
+            searchSubmitP: 1,
+            searchSelectP: 1
         }
 
         this.handleSubjectChange = this.handleSubjectChange.bind(this)
@@ -48,8 +50,7 @@ class SearchForm extends React.Component {
         this.setState({"query": event.target.value})
     }
 
-    async handleSearchSubmit(event) {
-        event.preventDefault()
+    async handleSearchSubmit() {
 
         if (this.state["query"] === "" && this.state["subject"] === "") {
             this.setState({valid_val: 1})
@@ -62,6 +63,7 @@ class SearchForm extends React.Component {
         } else if (this.state["query"] === "") {
             this.setState({valid_val: 5})
         } else {
+            this.setState({searchSubmitP: 2})
             const subjectParam = "subject=" + this.state["subject"]
             const url = "https://wikisearch-backend.herokuapp.com/wikimatch/?" + subjectParam
 
@@ -77,6 +79,7 @@ class SearchForm extends React.Component {
     }
 
     async handleSubjectSelection(num) {
+        this.setState({searchSelectP: 2})
         const queryParam = "query=" + this.state["query"]
         const titleLoc = "search" + num
         const titleParam = "title=" + this.state[titleLoc]
@@ -91,10 +94,8 @@ class SearchForm extends React.Component {
             article_1: response.article_1, article_2: response.article_2,
             url: response.url, step: 3
         })
-        if (response.article_2 !== "") {
-            this.setState({step: 4, num_articles: 2})
-        } else if (response.article_1 !== "") {
-            this.setState({step: 4, num_articles: 1})
+        if (response.article_1 !== "") {
+            this.setState({step: 4})
         }
     }
 
@@ -103,8 +104,9 @@ class SearchForm extends React.Component {
             step, search1, search2, search3, search4, search5,
             sentence1, sentence2, sentence3,
             citation1, citation2, citation3,
-            article_1, article_2, num_articles,
-            url, valid_val
+            article_1, article_2,
+            url, valid_val,
+            searchSubmitP, searchSelectP
         } = this.state
         switch (step) {
             case 1:
@@ -123,11 +125,10 @@ class SearchForm extends React.Component {
                                                   style={{fontSize: "85%"}}/>
                                 </Form.Group>
 
-                                <Button as={Col} variant="flat" type="submit"
-                                        onClick={this.handleSearchSubmit}
-                                        style={{fontSize: "85%",
-                                                maxWidth: "160px"}}>
-                                Search</Button>
+                                <SubmitButton
+                                    onSubmit={() => this.handleSearchSubmit()}
+                                    p={searchSubmitP}
+                                />
                             </Row>
                             <br />
                             <Form.Group controlId="queryGroup">
@@ -189,9 +190,16 @@ class SearchForm extends React.Component {
                     </div>
                 )
             case 4:
+                console.log("Article 1")
+                console.log(article_1)
+                console.log("Article 2")
+                console.log(article_2)
                 return(
                     <div>
-                    <ArticleAlert />
+                    <ArticleAlert
+                        article1={article_1}
+                        article2={article_2}
+                    />
                         <div id="citation">
                             <Citation
                                 digit={1}

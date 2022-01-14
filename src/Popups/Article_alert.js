@@ -11,6 +11,8 @@ function ArticleAlert(props) {
                 <Alert.Link href="#">here</Alert.Link> to browse them if you like.
             </Alert>
         )
+    } else {
+        return(<br/>)
     }
 }
 
