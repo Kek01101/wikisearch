@@ -234,6 +234,8 @@ class SearchForm extends React.Component {
                     </div>
                 )
             case 4:
+                console.log(article_1_title)
+                console.log(article_2_title)
                 return(
                     <div>
                     <ArticleAlert

@@ -5,7 +5,7 @@ function NewArticleModal(props) {
         return (
             <Modal
                 {...props}
-                size="lg"
+                size="md"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
@@ -19,17 +19,22 @@ function NewArticleModal(props) {
                         <Col>
                             {props.article1title}
                         </Col>
-                        <Button as={Col} variant="flat" onClick={() => props.newSubject(1)}>
-                            Select
-                        </Button>
+                        <Col style={{maxWidth:"100px"}}>
+                            <Button variant="flat" onClick={() => props.newSubject(1)}>
+                                Select
+                            </Button>
+                        </Col>
                     </Row>
+                    <br />
                     <Row>
                         <Col>
                             {props.article2title}
                         </Col>
-                        <Button as={Col} variant="flat" onClick={() => props.newSubject(2)}>
-                            Select
-                        </Button>
+                        <Col style={{maxWidth:"100px"}}>
+                            <Button variant="flat" onClick={() => props.newSubject(2)}>
+                                Select
+                            </Button>
+                        </Col>
                     </Row>
                 </Modal.Body>
                 <Modal.Footer>
