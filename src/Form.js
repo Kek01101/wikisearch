@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 import Citation from "./Citation";
 import ArticleAlert from "./Popups/Article_alert";
 import FormatAlert from "./Popups/FormatAlert";
@@ -29,8 +30,8 @@ class SearchForm extends React.Component {
             citation2: "",
             citation3: "",
             url: "",
-            article_1: "",
-            article_2: "",
+            article_1_title: "",
+            article_2_title: "",
             valid_val: 0,
             searchSubmitP: 1,
             searchSelectP: 1
@@ -91,11 +92,37 @@ class SearchForm extends React.Component {
         this.setState({
             sentence1: response.sentence_1, sentence2: response.sentence_2, sentence3: response.sentence_3,
             citation1: response.citation_1, citation2: response.citation_2, citation3: response.citation_3,
-            article_1: response.article_1, article_2: response.article_2,
-            url: response.url, step: 3
+            article_1_title: response.article_1_title, article_2_title: response.article_2_title,
+            url: response.url
         })
-        if (response.article_1 !== "") {
+        if (response.article_1_title !== "") {
             this.setState({step: 4})
+        } else {
+            this.setState({step: 3})
+        }
+    }
+
+    async handleNewSubject(num) {
+        this.setState({searchSelectP: 2, step: 2, article_1_title: "", article_2_title: ""})
+        const queryParam = "query=" + this.state["query"]
+        const titleLoc = "article_" + num + "_title"
+        const titleParam = "title=" + this.state[titleLoc]
+
+        const url = "https://wikisearch-backend.herokuapp.com/wikisearch/?" + queryParam + "&" + titleParam
+
+        const request = await fetch(url)
+        const response = await request.json()
+
+        this.setState({
+            sentence1: response.sentence_1, sentence2: response.sentence_2, sentence3: response.sentence_3,
+            citation1: response.citation_1, citation2: response.citation_2, citation3: response.citation_3,
+            article_1_title: response.article_1_title, article_2_title: response.article_2_title,
+            url: response.url
+        })
+        if (response.article_1_title !== "") {
+            this.setState({step: 4})
+        } else {
+            this.setState({step: 3})
         }
     }
 
@@ -104,7 +131,7 @@ class SearchForm extends React.Component {
             step, search1, search2, search3, search4, search5,
             sentence1, sentence2, sentence3,
             citation1, citation2, citation3,
-            article_1, article_2,
+            article_1_title, article_2_title,
             url, valid_val,
             searchSubmitP, searchSelectP
         } = this.state
@@ -140,32 +167,49 @@ class SearchForm extends React.Component {
                     </Container>
                 )
             case 2:
-                return (
-                    <Form>
-                        <Form.Text className="formText">
-                            We found multiple pages for your search,<br />please select the most relevant.
-                        </Form.Text>
-                        <Row>
-                            <Button variant="flat" type="button" onClick={() => this.handleSubjectSelection("1")}>{search1}</Button>
-                        </Row>
-                        <br />
-                        <Row>
-                            <Button variant="flat" type="button" onClick={() => this.handleSubjectSelection("2")}>{search2}</Button>
-                        </Row>
-                        <br />
-                        <Row>
-                            <Button variant="flat" type="button" onClick={() => this.handleSubjectSelection("3")}>{search3}</Button>
-                        </Row>
-                        <br />
-                        <Row>
-                            <Button variant="flat" type="button" onClick={() => this.handleSubjectSelection("4")}>{search4}</Button>
-                        </Row>
-                        <br />
-                        <Row>
-                            <Button variant="flat" type="button" onClick={() => this.handleSubjectSelection("5")}>{search5}</Button>
-                        </Row>
-                    </Form>
-                )
+                switch (searchSelectP) {
+                    case 1:
+                        return (
+                            <Form>
+                                <Form.Text className="formText">
+                                    We found multiple pages for your search,<br />please select the most relevant.
+                                </Form.Text>
+                                <Row>
+                                    <Button variant="flat" type="button" onClick={() => this.handleSubjectSelection("1")}>{search1}</Button>
+                                </Row>
+                                <br />
+                                <Row>
+                                    <Button variant="flat" type="button" onClick={() => this.handleSubjectSelection("2")}>{search2}</Button>
+                                </Row>
+                                <br />
+                                <Row>
+                                    <Button variant="flat" type="button" onClick={() => this.handleSubjectSelection("3")}>{search3}</Button>
+                                </Row>
+                                <br />
+                                <Row>
+                                    <Button variant="flat" type="button" onClick={() => this.handleSubjectSelection("4")}>{search4}</Button>
+                                </Row>
+                                <br />
+                                <Row>
+                                    <Button variant="flat" type="button" onClick={() => this.handleSubjectSelection("5")}>{search5}</Button>
+                                </Row>
+                            </Form>
+                        )
+                    case 2:
+                        return (
+                            <div style={{minWidth: "100px",
+                                        minHeight: "100px"}}>
+                                <Spinner
+                                    animation="border"
+                                    size="large"
+                                    role="status"
+                                    aria-hidden="true"
+                                    style={{minWidth: "100px",
+                                            minHeight: "100px"}}
+                                />
+                            </div>
+                        )
+                }
             case 3:
                 return(
                     <div id="citation">
@@ -190,15 +234,12 @@ class SearchForm extends React.Component {
                     </div>
                 )
             case 4:
-                console.log("Article 1")
-                console.log(article_1)
-                console.log("Article 2")
-                console.log(article_2)
                 return(
                     <div>
                     <ArticleAlert
-                        article1={article_1}
-                        article2={article_2}
+                        article1title={article_1_title}
+                        article2title={article_2_title}
+                        newSubject={(num) => this.handleNewSubject(num)}
                     />
                         <div id="citation">
                             <Citation
