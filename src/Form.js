@@ -55,7 +55,7 @@ class SearchForm extends React.Component {
 
         if (this.state["query"] === "" && this.state["subject"] === "") {
             this.setState({valid_val: 1})
-        } else if (this.state["subject"].length > 100) {
+        } else if (this.state["subject"].length > 50) {
             this.setState({valid_val: 2})
         } else if (this.state["query"].length > 150) {
             this.setState({valid_val: 3})
