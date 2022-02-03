@@ -18,7 +18,7 @@ function FormatAlert(props) {
                     variant={'danger'}
                     transition={Collapse}
                     style={{fontSize: '16px'}}>
-                    Your subject is too long, please reduce it to below 100 characters!
+                    Your subject is too long, please reduce it to below 50 characters!
                 </Alert>
             )
         case 3:
