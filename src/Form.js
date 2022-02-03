@@ -170,30 +170,37 @@ class SearchForm extends React.Component {
                 switch (searchSelectP) {
                     case 1:
                         return (
-                            <Form>
-                                <Form.Text className="formText">
-                                    We found multiple pages for your search,<br />please select the most relevant.
-                                </Form.Text>
-                                <Row>
-                                    <Button variant="flat" type="button" onClick={() => this.handleSubjectSelection("1")}>{search1}</Button>
-                                </Row>
+                            <div>
+                                <Form>
+                                    <Form.Text className="formText">
+                                        We found multiple pages for your search,<br />please select the most relevant.
+                                    </Form.Text>
+                                    <Row>
+                                        <Button variant="flat" type="button" onClick={() => this.handleSubjectSelection("1")}>{search1}</Button>
+                                    </Row>
+                                    <br />
+                                    <Row>
+                                        <Button variant="flat" type="button" onClick={() => this.handleSubjectSelection("2")}>{search2}</Button>
+                                    </Row>
+                                    <br />
+                                    <Row>
+                                        <Button variant="flat" type="button" onClick={() => this.handleSubjectSelection("3")}>{search3}</Button>
+                                    </Row>
+                                    <br />
+                                    <Row>
+                                        <Button variant="flat" type="button" onClick={() => this.handleSubjectSelection("4")}>{search4}</Button>
+                                    </Row>
+                                    <br />
+                                    <Row>
+                                        <Button variant="flat" type="button" onClick={() => this.handleSubjectSelection("5")}>{search5}</Button>
+                                    </Row>
+                                </Form>
                                 <br />
                                 <Row>
-                                    <Button variant="flat" type="button" onClick={() => this.handleSubjectSelection("2")}>{search2}</Button>
+                                    <Button className="pull-right" variant="flat" type="button" style={{
+                                        maxWidth: "100px"}} onClick={() => this.setState({step: 1, searchSubmitP: 1})}>Back</Button>
                                 </Row>
-                                <br />
-                                <Row>
-                                    <Button variant="flat" type="button" onClick={() => this.handleSubjectSelection("3")}>{search3}</Button>
-                                </Row>
-                                <br />
-                                <Row>
-                                    <Button variant="flat" type="button" onClick={() => this.handleSubjectSelection("4")}>{search4}</Button>
-                                </Row>
-                                <br />
-                                <Row>
-                                    <Button variant="flat" type="button" onClick={() => this.handleSubjectSelection("5")}>{search5}</Button>
-                                </Row>
-                            </Form>
+                            </div>
                         )
                     case 2:
                         return (
@@ -229,6 +236,11 @@ class SearchForm extends React.Component {
                             citation={citation3}
                         />
                         <br />
+                        <Row>
+                            <Button className="pull-right" variant="flat" type="button" style={{
+                                maxWidth: "100px"}} onClick={() => this.setState({step: 2, searchSelectP: 1})}>Back</Button>
+                        </Row>
+                        <br />
                         <a href={url} target="_blank" rel="noreferrer">Click here to go to source Wikipedia page</a>
                         <br />
                     </div>
@@ -259,6 +271,11 @@ class SearchForm extends React.Component {
                                 sentence={sentence3}
                                 citation={citation3}
                             />
+                            <br />
+                            <Row>
+                                <Button className="pull-right" variant="flat" type="button" style={{
+                                    maxWidth: "100px"}} onClick={() => this.setState({step: 2, searchSelectP: 1})}>Back</Button>
+                            </Row>
                             <br />
                             <a href={url} target="_blank" rel="noreferrer">Click here to go to source Wikipedia page</a>
                             <br />
