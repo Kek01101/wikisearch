@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import Citation from "./Citation";
-import ArticleAlert from "./Popups/Article_alert";
+import ArticleAlert from "./Popups/ArticleAlert";
 import FormatAlert from "./Popups/FormatAlert";
 import SubmitButton from "./SubmitButton";
 import "./Form.css"
@@ -147,7 +147,7 @@ class SearchForm extends React.Component {
                         <Form>
                             <Row style={{maxWidth: "100%"}}>
                                 <Form.Group as={Col} controlId="subjectGroup">
-                                    <Form.Control type="subject" placeholder="Enter Subject"
+                                    <Form.Control type="subject" placeholder="Enter Subject" autocomplete="off"
                                                   onChange={this.handleSubjectChange}
                                                   style={{fontSize: "85%"}}/>
                                 </Form.Group>
@@ -160,6 +160,7 @@ class SearchForm extends React.Component {
                             <br />
                             <Form.Group controlId="queryGroup">
                                 <Form.Control type="query" placeholder="Enter Query" onChange={this.handleQueryChange}
+                                              autocomplete="off"
                                               style={{fontSize: "85%",
                                                       maxWidth: "98%"}}/>
                             </Form.Group>
